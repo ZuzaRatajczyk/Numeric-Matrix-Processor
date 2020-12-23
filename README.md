@@ -18,11 +18,7 @@ They are returning result matrix of operation as the object of the class.
 
 `transpose` function is based on list comprehension. 
 It takes tranposition type as argument.
-It allows four types of transposition: 
-  * transposition along the main diagonal
-  * transposition along the side diagonal
-  * transposition along the vertical line
-  * transposition along the horizontal line
+It allows four types of transposition: ```"main diagonal", "side diagonal", "vertical line", "horizontal line"  ```
   
 Transposed matrix is returned as class instance.
  

@@ -17,7 +17,7 @@ class Matrix:
             return "The operation cannot be performed."
 
     def __mul__(self, multiplier):
-        if type(multiplier) == float or type(multiplier) == int: #  multiply by instant
+        if type(multiplier) == float or type(multiplier) == int:  # multiply by instant
             result_matrix = [[self.matrix[row][col] * multiplier
                               for col in range(self.num_of_columns)] for row in range(self.num_of_rows)]
             return Matrix(result_matrix)
@@ -59,7 +59,7 @@ class Matrix:
                 transposed_matrix.append(self.matrix[i])
             return Matrix(transposed_matrix)
 
-    def calculate_determinant(self, matrix):
+    def determinant(self, matrix):
         num_of_rows = len(matrix)
         num_of_columns = len(matrix[0])
         if num_of_rows == 1:  # base case matrix 1x1
@@ -72,7 +72,7 @@ class Matrix:
                 minor = deepcopy(matrix[1:])
                 for row in minor:
                     del row[column]
-                det += self.calculate_determinant(minor) * matrix[0][column] * pow(-1, 1 + column + 1)
+                det += self.determinant(minor) * matrix[0][column] * pow(-1, 1 + column + 1)
             return det
 
     @staticmethod
@@ -96,18 +96,18 @@ class Matrix:
                 temp_matrix = self.delete_row_column(temp_matrix, row, column)
                 if row % 2 == 0:    # sign of the element in matrix of cofactors (sign pattern for cofactors)
                     if column % 2 == 0:
-                        list_of_cofactors[row][column] = (self.calculate_determinant(temp_matrix))
+                        list_of_cofactors[row][column] = (self.determinant(temp_matrix))
                     else:
-                        list_of_cofactors[row][column] = -(self.calculate_determinant(temp_matrix))
+                        list_of_cofactors[row][column] = -(self.determinant(temp_matrix))
                 else:
                     if column % 2 == 0:
-                        list_of_cofactors[row][column] = -(self.calculate_determinant(temp_matrix))
+                        list_of_cofactors[row][column] = -(self.determinant(temp_matrix))
                     else:
-                        list_of_cofactors[row][column] = (self.calculate_determinant(temp_matrix))
+                        list_of_cofactors[row][column] = (self.determinant(temp_matrix))
         return Matrix(list_of_cofactors)
 
-    def find_inverse_matrix(self):
-        determinant = self.calculate_determinant(self.matrix)
+    def inverse_matrix(self):
+        determinant = self.determinant(self.matrix)
         if determinant == 0:
             print("This matrix doesn't have an inverse.")
         else:
@@ -115,11 +115,11 @@ class Matrix:
             t_matrix = matrix_of_cofactors.transpose("1")
             inverse_matrix = [[(t_matrix.matrix[row][col] * (1/determinant))
                               for col in range(self.num_of_columns)] for row in range(self.num_of_rows)]
-            inverse_matrix = self.truncate_elements(inverse_matrix)
+            inverse_matrix = self._truncate_elements(inverse_matrix)
             return Matrix(inverse_matrix)
 
     @staticmethod
-    def truncate_elements(list_of_rows):
+    def _truncate_elements(list_of_rows):
         for i, row in enumerate(list_of_rows):
             for j, num in enumerate(row):
                 if type(num) == float:
@@ -188,12 +188,12 @@ def main():
             t_matrix.show_matrix()
         elif operation == "5":
             matrix = get_data()
-            determinant = matrix.calculate_determinant(matrix.matrix)
+            determinant = matrix.determinant(matrix.matrix)
             print("The result is:")
             print(determinant)
         elif operation == "6":
             matrix = get_data()
-            inverse_matrix = matrix.find_inverse_matrix()
+            inverse_matrix = matrix.inverse_matrix()
             print("The result is:")
             inverse_matrix.show_matrix()
         else:

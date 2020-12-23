@@ -34,15 +34,15 @@ Inverse matrix is returned as instance object.
 
 Class also has function `show matrix` which shows matrix in rows and columns.
 
-
+# Demo program
 Program enables to perfom basic operations on matrices witch is: 
   * add two matrices 
-  * multiply matrice by number and matrix by matrix multilication
+  * multiply matrice by number 
+  * matrix by matrix multilication
   * transpose
   * find determinant 
   * inverse matrix
 User can choose one of the options from the menu by writing its corresponding number.
   
   It takes dimemnsion of matrix as two integers separeted by space.
-  Then takes each row separated by enter.
-  After last row program shows result of the operation (matrix or determinant).
+  Then takes each row separated by enter and at the end shows result of the operation (matrix or determinant).

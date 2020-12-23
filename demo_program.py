@@ -3,6 +3,7 @@ from matrix import Matrix
 
 def get_list_of_rows(dimension):
     rows = []
+    print("Enter each row in separate line: ")
     for _ in range(int(dimension[0])):
         row = input().split()
         row = [float(num) for num in row]
@@ -45,9 +46,11 @@ def main():
             result_matrix.show_matrix()
         elif operation == "4":
             print("1. Main diagonal\n2. Side diagonal\n3.Vertical diagonal\n4.Horizontal diagonal")
-            transpose_type = input()
+            trans_type = int(input("Your choice: "))
             matrix = get_data()
-            t_matrix = matrix.transpose(transpose_type)
+            transposition_types = {1: "main diagonal", 2: "side diagonal",
+                                   3: "vertical diagonal", 4: "horizontal diagonal"}
+            t_matrix = matrix.transpose(transposition_types[trans_type])
             print("The result is:")
             t_matrix.show_matrix()
         elif operation == "5":

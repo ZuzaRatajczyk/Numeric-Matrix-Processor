@@ -38,23 +38,23 @@ class Matrix:
 
     def transpose(self, transpose_type):
         transposed_matrix = []
-        if transpose_type == "1":  # main diagonal
+        if transpose_type == "main diagonal":
             for i in range(self.num_of_columns):
                 t_row = [row[i] for row in self.matrix]
                 transposed_matrix.append(t_row)
             return Matrix(transposed_matrix)
-        elif transpose_type == "2":  # side diagonal
+        elif transpose_type == "side diagonal":
             for i in reversed(range(self.num_of_columns)):
                 t_row = [row[i] for row in self.matrix]
                 t_row.reverse()
                 transposed_matrix.append(t_row)
             return Matrix(transposed_matrix)
-        elif transpose_type == "3":  # vertical diagonal
+        elif transpose_type == "vertical diagonal":
             for row in self.matrix:
                 row.reverse()
                 transposed_matrix.append(row)
             return Matrix(transposed_matrix)
-        elif transpose_type == "4":  # horizontal diagonal
+        elif transpose_type == "horizontal diagonal":
             for i in reversed(range(self.num_of_rows)):
                 transposed_matrix.append(self.matrix[i])
             return Matrix(transposed_matrix)
@@ -132,6 +132,9 @@ class Matrix:
         for row in self.matrix:
             row = [int(num) if num % 1 == 0 else round(float(num), 2) for num in row]
             row = [str(num) for num in row]
+            for i, element in enumerate(row):  # align matrix
+                element = "{:^3}".format(element)
+                row[i] = element
             row = " ".join(row)
             matrix += (row + "\n")
         print(matrix)

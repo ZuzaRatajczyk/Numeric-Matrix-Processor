@@ -61,8 +61,11 @@ def main():
         elif operation == "6":
             matrix = get_data()
             inverse_matrix = matrix.inverse_matrix()
-            print("The result is:")
-            inverse_matrix.show_matrix()
+            if inverse_matrix:
+                print("The result is:")
+                inverse_matrix.show_matrix()
+            else:
+                pass
         else:
             operation = 0
 
